@@ -18,9 +18,12 @@ with serial.Serial(PORT, BAUD) as ser, open(filename, 'w', newline='') as f:
     print("Recording... Ctrl+C to stop")
     try:
         while True:
-            line = ser.readline().decode('utf-8').strip()
-            if ',' in line:
-                parts = line.split(',')
-                writer.writerow(parts)
+            try:
+                line = ser.readline().decode('utf-8', errors='ignore').strip()
+                if ',' in line:
+                    parts = line.split(',')
+                    writer.writerow(parts)
+            except Exception:
+                pass
     except KeyboardInterrupt:
         print(f"\nSaved to {filename}")
