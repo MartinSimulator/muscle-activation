@@ -1,7 +1,27 @@
+import sys
+from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
 
-file = input("CSV file to plot (e.g. data/mvc_attempt1.csv): ")
+DATA_DIR = Path(__file__).resolve().parent.parent / "emg-firmware" / "data"
+
+if len(sys.argv) > 1:
+    file_input = sys.argv[1]
+else:
+    file_input = input("CSV file to plot (e.g. data/mvc_attempt1.csv): ").strip()
+
+
+file_path = Path(file_input)
+if not file_path.is_file():
+    file_path = DATA_DIR / file_input
+if not file_path.is_file():
+    available = ", ".join(p.name for p in sorted(DATA_DIR.glob("*.csv")))
+    raise FileNotFoundError(
+        f"Could not find {file_input!r}. Tried {file_path}.\n"
+        f"Available files in {DATA_DIR}: {available}"
+    )
+file = str(file_path)
+
 df = pd.read_csv(file)
 
 df['timestamp_us'] = pd.to_numeric(df['timestamp_us'], errors='coerce')

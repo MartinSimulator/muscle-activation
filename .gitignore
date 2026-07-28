@@ -4,4 +4,4 @@ emg-firmware/.pio
 emg-firmware/.vscode/.browse.c_cpp.db*
 emg-firmware/.vscode/c_cpp_properties.json
 emg-firmware/.vscode/launch.json
-emg-firmware/.vscode/ipch
+emg-firmware/.vscode/ipchvenv/
