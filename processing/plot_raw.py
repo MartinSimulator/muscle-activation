@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "emg-firmware" / "data"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 if len(sys.argv) > 1:
     file_input = sys.argv[1]
